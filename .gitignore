@@ -1,0 +1,3 @@
+*.syso
+/pdfutil.exe
+/release/

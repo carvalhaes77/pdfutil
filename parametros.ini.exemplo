@@ -1,0 +1,13 @@
+# PDF UTIL. Na pasta do pdfutil.exe o arquivo se chama parametros.ini.
+# Se for apagado, o programa cria outro. Nada vai para o Registro.
+
+saida=
+pasta=
+iniciar=nao
+
+# acao=juntar
+# arquivos=C:\a.pdf|C:\b.pdf
+# modo=paginas
+# pagina=1
+# paginas=1-2
+# compressao=40
