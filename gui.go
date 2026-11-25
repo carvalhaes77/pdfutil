@@ -119,22 +119,27 @@ func runGUI() error {
 				},
 			},
 			Composite{
-				Layout: HBox{MarginsZero: true},
+				Layout: VBox{MarginsZero: true, Spacing: 6},
 				Children: []Widget{
-					HSpacer{},
-					PushButton{
-						AssignTo:    &ui.gerar,
-						Text:        "GERAR",
-						Font:        Font{Family: "Segoe UI", PointSize: 18, Bold: true},
-						MinSize:     Size{Width: 176, Height: 48},
-						MaxSize:     Size{Width: 176, Height: 48},
-						ToolTipText: "Gera o PDF novo na pasta de saída, conforme a operação escolhida. O arquivo original não é alterado.",
-						OnClicked:   ui.gerarArquivos,
+					Composite{
+						Layout: HBox{MarginsZero: true},
+						Children: []Widget{
+							HSpacer{},
+							PushButton{
+								AssignTo:    &ui.gerar,
+								Text:        "GERAR",
+								Font:        Font{Family: "Segoe UI", PointSize: 18, Bold: true},
+								MinSize:     Size{Width: 176, Height: 72},
+								MaxSize:     Size{Width: 176, Height: 72},
+								ToolTipText: "Gera o PDF novo na pasta de saída, conforme a operação escolhida. O arquivo original não é alterado.",
+								OnClicked:   ui.gerarArquivos,
+							},
+							HSpacer{},
+						},
 					},
-					HSpacer{},
+					Label{AssignTo: &ui.estado, Text: "Pronto.", TextAlignment: AlignCenter},
 				},
 			},
-			Label{AssignTo: &ui.estado, Text: "Pronto."},
 			CheckBox{AssignTo: &ui.inicio, Text: "Iniciar com o Windows neste usuário"},
 			Label{
 				Text:      linhaCredito(),
@@ -343,9 +348,9 @@ func botaoArquivos(texto, dica string, aoClicar walk.EventHandler) PushButton {
 		Text:        texto,
 		ToolTipText: dica,
 		OnClicked:   aoClicar,
-		Font:        Font{Family: "Segoe UI", PointSize: 7},
-		MinSize:     Size{Width: 84, Height: 22},
-		MaxSize:     Size{Width: 84, Height: 22},
+		Font:        Font{Family: "Segoe UI", PointSize: 9},
+		MinSize:     Size{Width: 112, Height: 30},
+		MaxSize:     Size{Width: 112, Height: 30},
 	}
 }
 
