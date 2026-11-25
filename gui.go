@@ -62,11 +62,14 @@ func runGUI() error {
 			Composite{
 				Layout: HBox{MarginsZero: true},
 				Children: []Widget{
-					PushButton{Text: "Adicionar PDF", OnClicked: ui.adicionarPDF},
-					PushButton{Text: "Adicionar pasta", OnClicked: ui.adicionarPasta},
-					PushButton{Text: "Remover", OnClicked: ui.remover},
-					PushButton{Text: "Subir", OnClicked: func() { ui.mover(-1) }},
-					PushButton{Text: "Descer", OnClicked: func() { ui.mover(1) }},
+					HSpacer{},
+					botaoArquivos("Adicionar PDF", "", ui.adicionarPDF),
+					botaoArquivos("Adicionar pasta", "", ui.adicionarPasta),
+					botaoArquivos("Remover", "Remove o arquivo selecionado da janela Arquivos. O PDF no disco não é apagado.", ui.remover),
+					botaoArquivos("Limpar", "Remove todos os arquivos da janela Arquivos. Os PDF no disco não são apagados.", ui.limpar),
+					botaoArquivos("Subir", "Sobe o arquivo selecionado na sequência da janela Arquivos.", func() { ui.mover(-1) }),
+					botaoArquivos("Descer", "Desce o arquivo selecionado na sequência da janela Arquivos.", func() { ui.mover(1) }),
+					HSpacer{},
 				},
 			},
 			Composite{
@@ -118,10 +121,20 @@ func runGUI() error {
 			Composite{
 				Layout: HBox{MarginsZero: true},
 				Children: []Widget{
-					PushButton{AssignTo: &ui.gerar, Text: "Gerar", OnClicked: ui.gerarArquivos},
-					Label{AssignTo: &ui.estado, Text: "Pronto."},
+					HSpacer{},
+					PushButton{
+						AssignTo:    &ui.gerar,
+						Text:        "GERAR",
+						Font:        Font{Family: "Segoe UI", PointSize: 18, Bold: true},
+						MinSize:     Size{Width: 176, Height: 48},
+						MaxSize:     Size{Width: 176, Height: 48},
+						ToolTipText: "Gera o PDF novo na pasta de saída, conforme a operação escolhida. O arquivo original não é alterado.",
+						OnClicked:   ui.gerarArquivos,
+					},
+					HSpacer{},
 				},
 			},
+			Label{AssignTo: &ui.estado, Text: "Pronto."},
 			CheckBox{AssignTo: &ui.inicio, Text: "Iniciar com o Windows neste usuário"},
 			Label{
 				Text:      linhaCredito(),
@@ -325,6 +338,17 @@ func (ui *janela) adicionarPasta() {
 	ui.definirEstado(itoa(len(pdfs)) + " PDF da pasta.")
 }
 
+func botaoArquivos(texto, dica string, aoClicar walk.EventHandler) PushButton {
+	return PushButton{
+		Text:        texto,
+		ToolTipText: dica,
+		OnClicked:   aoClicar,
+		Font:        Font{Family: "Segoe UI", PointSize: 7},
+		MinSize:     Size{Width: 84, Height: 22},
+		MaxSize:     Size{Width: 84, Height: 22},
+	}
+}
+
 func (ui *janela) remover() {
 	i := ui.lista.CurrentIndex()
 	if i < 0 || i >= len(ui.arquivos) {
@@ -338,6 +362,14 @@ func (ui *janela) remover() {
 	if i >= 0 {
 		_ = ui.lista.SetCurrentIndex(i)
 	}
+}
+
+func (ui *janela) limpar() {
+	if len(ui.arquivos) == 0 {
+		return
+	}
+	ui.arquivos = nil
+	ui.atualizarLista()
 }
 
 func (ui *janela) mover(delta int) {

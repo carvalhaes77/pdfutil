@@ -20,7 +20,7 @@ Abra o `pdfutil.exe`. A janela se chama **PDF UTIL**. Se ela for fechada, o prog
 1. Escolha um PDF ou uma pasta com PDFs.
 2. Para juntar mais de um arquivo, use **Subir** e **Descer** até a ordem desejada.
 3. Em **Saída**, escolha a pasta onde o arquivo novo será gravado. Se ficar em branco, vale a pasta do primeiro PDF.
-4. Escolha a operação e clique em **Gerar**.
+4. Escolha a operação e clique em **GERAR**.
 
 | Operação | Arquivo gerado |
 | --- | --- |
