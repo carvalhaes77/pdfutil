@@ -91,8 +91,8 @@ func runGUI() error {
 			},
 			GroupBox{
 				AssignTo: &ui.compGrupo,
-				Title:    "Comprimir — a página vira imagem e a qualidade cai",
-				Layout:   VBox{},
+				Title:  "Comprimir",
+				Layout: VBox{},
 				Children: []Widget{
 					Composite{
 						Layout: HBox{MarginsZero: true},
@@ -103,7 +103,7 @@ func runGUI() error {
 							RadioButton{AssignTo: &ui.c85, Text: "85%"},
 						},
 					},
-					Label{Text: "Quanto maior a porcentagem, menor o PDF. O resultado continua PDF. Confira a leitura antes de enviar."},
+					Label{Text: "A página vira imagem e a qualidade cai. Quanto maior a porcentagem, menor o PDF. O resultado continua PDF. Confira a leitura antes de enviar."},
 				},
 			},
 			GroupBox{
